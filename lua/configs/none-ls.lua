@@ -1,8 +1,15 @@
+local null_ls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local null_ls = require('null-ls')
 
-local opts = {
-  sources = {
+local M = {}
+
+local sources = {
+  go = {
+    null_ls.builtins.formatting.gofumpt,
+    null_ls.builtins.formatting.goimports_reviser,
+    null_ls.builtins.formatting.golines,
+  },
+  python = {
     null_ls.builtins.formatting.black,
     null_ls.builtins.diagnostics.mypy.with({
       extra_args = function()
@@ -10,8 +17,22 @@ local opts = {
       return { "--python-executable", virtual .. "/bin/python3" }
       end,
     }),
-  },
-  on_attach = function(client, bufnr)
+  }
+}
+
+
+M.get_language_config = function(language)
+  local opts = {}
+
+  if language == 'go' then
+    opts.sources = sources.go
+  elseif language == 'python' then
+    opts.sources = sources.python
+  else
+    return {}
+  end
+
+  opts.on_attach = function (client, bufnr)
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({
         group = augroup,
@@ -25,8 +46,9 @@ local opts = {
         end,
       })
     end
-  end,
-}
-return opts
+  end
 
+  return opts
+end
 
+return M

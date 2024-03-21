@@ -29,6 +29,9 @@ return {
     opts = function ()
       return require "configs.treesitter"
     end,
+    dependencies = {
+      'vrischmann/tree-sitter-templ',
+    },
   },
 
   {
@@ -50,14 +53,8 @@ return {
     "nvimtools/none-ls.nvim",
     ft = { "go", "python" },
     opts =  function()
-      local filetype = vim.api.nvim_buf_get_option(0, 'filetype') -- get the current file type
-      if filetype == 'go' then
-        return require"configs.none-ls-go"
-      elseif filetype == "python" then
-        return require"configs.none-ls-python"
-      else
-        return {}
-      end
+      local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+      return require("configs.none-ls-go").get_language_config(filetype)
     end,
   },
 }
