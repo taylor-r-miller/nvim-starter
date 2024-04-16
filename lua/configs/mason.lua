@@ -10,6 +10,9 @@ local opts = {
     "typescript-language-server",
     "deno",
     "prettier",
+    "htmx-lsp",
+    "templ",
+    "tailwindcss-language-server",
 
     -- c/cpp stuff
     "clangd",

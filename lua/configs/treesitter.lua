@@ -10,15 +10,9 @@ local opts = {
     "c",
     "markdown",
     "markdown_inline",
-    "go"
+    "go",
+    "templ",
   },
-  indent = {
-    enable = true,
-    -- disable = {
-    --   "python"
-    -- },
-  },
-
 }
 
 return opts

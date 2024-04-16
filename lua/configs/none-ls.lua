@@ -24,7 +24,7 @@ local sources = {
 M.get_language_config = function(language)
   local opts = {}
 
-  if language == 'go' then
+  if language == 'go' or language == 'templ' then
     opts.sources = sources.go
   elseif language == 'python' then
     opts.sources = sources.python

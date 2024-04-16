@@ -27,11 +27,14 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function ()
-      return require "configs.treesitter"
+      local opts = require("nvchad.configs.treesitter")
+      local overrides = require "configs.treesitter"
+      opts.ensure_installed = overrides.ensure_installed
+      return opts
     end,
     dependencies = {
       'vrischmann/tree-sitter-templ',
-    },
+    }
   },
 
   {
@@ -51,10 +54,18 @@ return {
 
   {
     "nvimtools/none-ls.nvim",
-    ft = { "go", "python" },
+    ft = { "go", "python", "templ" },
     opts =  function()
       local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-      return require("configs.none-ls-go").get_language_config(filetype)
+      return require("configs.none-ls").get_language_config(filetype)
+    end,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    ft = { "javascriptreact", "typescriptreact","html","templ"},
+    config = function()
+      require("nvim-ts-autotag").setup()
     end,
   },
 }
