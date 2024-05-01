@@ -11,3 +11,6 @@ map("n", "<leader>fm", function()
 end, { desc = "File Format with conform" })
 
 map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
+
+map("n", "<leader>gb", "<cmd>Git blame<CR>", { desc = "show git blame for current buffer" })
+

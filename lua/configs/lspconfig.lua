@@ -22,12 +22,21 @@ local go_attach = function (client, bufnr)
   end
 end
 
+
+
 local servers = {
   html = {
     filetypes = { "html", "templ" },
   },
   cssls = {},
-  tsserver = {},
+  tsserver = {
+    init_options = {
+      preferences = {
+        disableSuggestions = true
+      }
+    }
+  },
+  eslint = {},
   clangd = {},
   pyright = {},
   gopls = {
@@ -50,7 +59,7 @@ local servers = {
     filetypes = { "html", "templ" },
   },
   tailwindcss = {
-    filetypes = { "templ", "javascript", "typescript", "react", "html" },
+    filetypes = { "templ", "javascriptreact", "typescriptreact", "react", "html" },
     init_options = { userLanguages = { templ = "html" } },
   }
 }

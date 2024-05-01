@@ -17,6 +17,10 @@ local sources = {
       return { "--python-executable", virtual .. "/bin/python3" }
       end,
     }),
+  },
+  js = {
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.eslint,
   }
 }
 
@@ -28,6 +32,8 @@ M.get_language_config = function(language)
     opts.sources = sources.go
   elseif language == 'python' then
     opts.sources = sources.python
+  elseif language == 'javascript' or language == 'typescript' then
+    opts.sources = sources.js
   else
     return {}
   end

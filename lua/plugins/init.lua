@@ -54,7 +54,7 @@ return {
 
   {
     "nvimtools/none-ls.nvim",
-    ft = { "go", "python", "templ" },
+    ft = { "go", "python", "templ", "javascriptreact", "typescriptreact", "javascript", "typescript" },
     opts =  function()
       local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
       return require("configs.none-ls").get_language_config(filetype)
@@ -68,4 +68,29 @@ return {
       require("nvim-ts-autotag").setup()
     end,
   },
+  {
+    "tpope/vim-fugitive",
+    lazy = false
+  },
+  {
+    "ruanyl/vim-gh-line",
+    lazy = false
+  },
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+    },
+    keys = {
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    },
+  }
 }
